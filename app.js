@@ -45,12 +45,49 @@ let videos = [];
 const userId = 'user_' + Math.random().toString(36).substr(2, 9);
 
 // Загрузка видео из Firebase
-database.ref('videos').on('value', (snapshot) => {
-  const data = snapshot.val();
-  videos = data ? Object.values(data) : [];
-  currentVideoIndex = 0;
-  loadCurrentVideo();
-});
+import { database } from './firebase.js';
+import { ref, onValue } from "firebase/database";
+
+const videoFrame = document.getElementById('video-frame');
+const videoTitle = document.getElementById('video-title');
+const noVideos = document.getElementById('no-videos');
+
+// Проверка подключения
+const fetchVideos = () => {
+  const videosRef = ref(database, 'videos');
+  
+  onValue(videosRef, (snapshot) => {
+    const data = snapshot.val();
+    
+    if (!data) {
+      noVideos.style.display = 'block';
+      console.error("Нет данных в БД");
+      return;
+    }
+    
+    const videos = Object.values(data);
+    displayVideo(videos[0]); // Показываем первое видео
+  }, (error) => {
+    console.error("Ошибка чтения:", error);
+  });
+};
+
+const displayVideo = (video) => {
+  if (!video) {
+    noVideos.style.display = 'block';
+    return;
+  }
+  
+  videoTitle.textContent = video.title;
+  videoFrame.src = getEmbedUrl(video.url, video.source);
+  videoFrame.onerror = () => {
+    console.error("Ошибка загрузки видео");
+    videoFrame.src = '';
+  };
+};
+
+// Запуск при загрузке
+document.addEventListener('DOMContentLoaded', fetchVideos);
 
 function loadCurrentVideo() {
   if (currentVideoIndex < videos.length) {
