@@ -42,7 +42,7 @@ function showNextVideo() {
 }
 
 function notifyTelegram(videoUrl) {
-  const botToken = "7571607337:AAH6XN7ZqLKjxKqjgCkCnx81wDD0LNVjugk";
+  const botToken = "YOUR_BOT_TOKEN";
   const chatId = "YOUR_CHAT_ID";
   const message = `❤️ Пользователь лайкнул: ${videoUrl}`;
 
