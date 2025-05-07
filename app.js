@@ -29,7 +29,7 @@ export { database };
 
 // Инициализация Firebase
 firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
+//const database = firebase.database();
 
 // Элементы интерфейса
 const videoCard = document.getElementById('video-card');
