@@ -1,13 +1,31 @@
 // Конфигурация Firebase (замените на свою)
+//const firebaseConfig = {
+  //apiKey: "AIzaSyDMxIaWJybxqyP3s_-W6pzJC2o26wC1f7s",
+ // authDomain: "video-swiper-bot.firebaseapp.com",
+//  databaseURL: "https://video-swiper-bot-default-rtdb.europe-west1.firebasedatabase.app",
+//  projectId: "video-swiper-bot",
+//  storageBucket: "video-swiper-bot.firebasestorage.app",
+//  messagingSenderId: "483808328876",
+//  appId: "1:483808328876:web:a4bf3c2ebf8d9ba910f309"
+//};
+
+import { initializeApp } from "firebase/app";
+import { getDatabase } from "firebase/database";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDMxIaWJybxqyP3s_-W6pzJC2o26wC1f7s",
   authDomain: "video-swiper-bot.firebaseapp.com",
   databaseURL: "https://video-swiper-bot-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "video-swiper-bot",
   storageBucket: "video-swiper-bot.firebasestorage.app",
-  messagingSenderId: "483808328876",
+  messagingSenderId: "В483808328876",
   appId: "1:483808328876:web:a4bf3c2ebf8d9ba910f309"
 };
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+export { database };
 
 // Инициализация Firebase
 firebase.initializeApp(firebaseConfig);
